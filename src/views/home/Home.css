@@ -1,0 +1,122 @@
+@font-face {
+  font-family: SurfingCapital;
+  src: url(../../assets/fonts/surfing_capital/SurfingCapital.ttf);
+}
+
+
+.Logo {
+  width: 50px;
+}
+
+.LogoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.NameApp {
+  font-family: SurfingCapital;
+  font-size: 1.6em;
+}
+
+.Nav {
+  color: rgb(0, 0, 0);
+  width: calc(100% - 40px);
+  background-color: #FFC017;
+  padding: 10px 20px;
+  border-bottom: 1px solid black;
+  height: 45px;
+  position: fixed;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10000;
+
+}
+
+.ButtonPadrao {
+  background-color: black;
+  color: white;
+  padding: 10px 30px;
+  height: 45px;
+  border-radius: 25px;
+  border: none;
+  float: right;
+  align-self: center;
+
+}
+
+.ArticlesContainer {
+  max-width: 700px;
+  background-color: black;
+  margin: auto;
+}
+
+.CardArticle .Perfil img {
+  width: 30px;
+  height: 30px;
+  background: black;
+  border-radius: 50%;
+
+
+}
+
+.CardArticle .Dados {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Perfil {
+  display: inline-block;
+}
+
+.NomeDoPerfil {
+  margin: auto 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.CardArticle {
+  width: calc(100% - 20px);
+  background-color: white;
+  padding: 30px 16px;
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.CardArticle h2,
+.CardArticle h3,
+.CardArticle p {
+  margin: 0px;
+}
+
+.Time {
+  float: right;
+  font-weight: 300;
+  font-size: 14px;
+
+}
+
+.CardArticle h3 {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.CardArticle img {
+  width: 150px;
+  height: 100px;
+  margin: auto;
+  border: none;
+}
+
+.TextBanner {
+
+  z-index: 10;
+  font-size: 3.41rem;
+  font-family: fangsong;
+  z-index: 10;
+  font-size: 3.41rem;
+  font-family: fangsong;
+  margin: auto;
+  text-align: center;
+}
