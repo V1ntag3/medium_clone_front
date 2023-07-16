@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './views/home/Home';
+import LoginRegister from './views/loginRegister/LoginRegister';
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     path: "/",
     Component:Home
   },
+  {
+    path: "/singin",
+    Component: LoginRegister
+  }
 
 ]);
 

@@ -72,7 +72,7 @@
 }
 
 .NomeDoPerfil {
-  margin: auto 15px;
+  margin: auto 15px auto 7px;
   font-size: 16px;
   font-weight: 600;
 }
@@ -100,6 +100,7 @@
 .CardArticle h3 {
   font-size: 16px;
   opacity: 0.8;
+  margin: 5px 0px;
 }
 
 .CardArticle img {
@@ -119,4 +120,7 @@
   font-family: fangsong;
   margin: auto;
   text-align: center;
+}
+.TextComplete{
+  padding: 0px 20px 0px 0px;
 }

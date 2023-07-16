@@ -4,6 +4,8 @@ import './BackGround.css'
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import config from '../../config.js'
+import {Link} from 'react-router-dom'
+
 import { useEffect, useState } from 'react';
 
 const instance = axios.create({
@@ -71,11 +73,11 @@ function Home() {
                         abstract: response.data[key].abstract,
                         img: response.data[key].photoBanner,
                         date: mesAbreviado + " " + doisUltimosDigitosAno,
-                        readTime: calcularTempoLeitura(response.data[key].text)
-                    }
-
+                        readTime: calcularTempoLeitura(response.data[key].text),
+                        photoUser: response.data[key].User.imageProfile,
+                        nameUser: response.data[key].User.name
+                        }
                     articlesArray.push(item)
-
                 }
                 setArticles(articlesArray)
 
@@ -84,13 +86,13 @@ function Home() {
 
     return (
         <>
-            <div className="Nav">
+            <div className="Nav" style={{width: 'calc(100% - 50px)'}}>
                 <div className='LogoContainer'>
                     <img className='Logo' src={Logo} />
                     <span style={{ marginLeft: 10 }} className="NameApp">NewMedium</span>
                 </div>
                 <div>
-                    <button className='ButtonPadrao'>Sing in</button>
+                <Link to="/singin"> <button className='ButtonPadrao'>Sing in</button></Link>
                 </div>
             </div>
             <div style={{ position: 'relative', top: 66 }}>
@@ -132,24 +134,24 @@ function Home() {
                             return <div key={index} className='CardArticle'>
                                 <div className='Dados'>
                                     <div className='Perfil'>
-                                        <img />
+                                        <img src={config.baseURL  + element.photoUser} />
                                     </div>
-                                    <span className='NomeDoPerfil'>Nome do perfil</span>
+                                    <span className='NomeDoPerfil'>{element.nameUser}</span>
                                     <span className='Time'>{element.date} . {element.readTime} min read</span>
                                 </div>
                                 <div style={{ display: 'flex' }}>
-                                    <div>
+                                    <div className='TextComplete'>
                                         <h2>
                                             {element.title}
                                         </h2>
                                         <h3>
                                             {element.subtitle}
                                         </h3>
-                                        <p>
+                                        <p style={{textAlign: 'justify'}}>
                                             {element.abstract}
                                         </p>
                                     </div>
-                                    <img src={config.baseURL + element.img} />
+                                    <img src={config.baseURL +element.img} />
                                 </div>
                             </div>
 

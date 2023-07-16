@@ -1,0 +1,146 @@
+.ContainerLoginRegister {
+    background-color: black;
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    backface-visibility: visible;
+    perspective-origin: 150% 150%;
+    transform-style: preserve-3d;
+    border-radius: 12px;
+
+    margin-top: 80px;
+    transition: ease-in-out 0.8s;
+}
+
+.ContainerLoginRegister h1,
+.ContainerLoginRegister h3 {
+    text-align: center;
+}
+
+.ContainerLoginRegister h3 {
+    margin-top: 30px;
+    color: rgb(49, 149, 60);
+}
+
+.LinkToRegister {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.Backgound {
+    width: 100%;
+    height: 80vh;
+    background-color: white;
+    position: absolute;
+    border-radius: 12px;
+    -webkit-box-shadow: -10px 4px 67px -11px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: -10px 4px 67px -11px rgba(0, 0, 0, 0.5);
+    box-shadow: -10px 4px 67px -11px rgba(0, 0, 0, 0.5);
+
+}
+
+.Login,
+.Register {
+    margin-top: 20px;
+    position: absolute;
+    width: calc(100% - 80px);
+    padding: 0px 40px 40px 40px;
+}
+
+.Login {
+
+    transform: translateZ(20px);
+}
+
+.Register {
+
+    transform: translateZ(-20px) rotateY(180deg);
+    overflow: auto;
+
+}
+
+.InputPadrao {
+    margin: 0px auto 10px auto;
+    display: block;
+    max-width: 314px;
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    border: 3px solid rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 2px 8px;
+}
+
+.LabelPadrao {
+    font-size: 14px;
+    display: block;
+    max-width: 335px;
+    margin: 10px auto auto auto;
+}
+
+.ContainerLoginRegister .Button {
+    display: block;
+    margin: 30px auto auto auto;
+    max-width: 330px;
+    width: 100%;
+    height: 45px;
+    border-radius: 30px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.ButtonRegister {
+    display: block;
+    margin: 30px auto auto auto;
+    max-width: 330px;
+    width: 100%;
+    height: 45px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 900;
+    border: 3px solid rgb(49, 149, 60);
+    background-color: white;
+    color: rgb(49, 149, 60);
+}
+
+@media (max-width: 823px) {
+    .Backgound {
+        width: calc(100% - 40px);
+        margin: 0px 20px;
+    }
+}
+
+@media (max-width: 556px) {
+
+    .ContainerLoginRegister {
+        margin: 0px;
+        border: 0px;
+        border-radius: 0px;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .Backgound {
+        border-radius: 0px;
+        -webkit-box-shadow: unset;
+        -moz-box-shadow: unset;
+        box-shadow: unset;
+        height: 102vh;
+        width: calc(100%);
+        margin: 0px;
+    }
+
+    .Login,
+    .Register {
+        padding: 0px;
+        width: 100%;
+    }
+
+    .ContainerLoginRegister h1 {
+        margin-top: 50px;
+    }
+}
