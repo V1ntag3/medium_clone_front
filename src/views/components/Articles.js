@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../../config.js'
-import UserDefault from '../../assets/imgs/user.svg'
+import UserDefault from '../../assets/svgs/user.svg'
 import { useEffect, useState } from 'react';
 
 // List Articles
@@ -57,6 +57,7 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
                 })
         }
     }
+    
     function calcularTempoLeitura(texto) {
         const palavrasPorMinuto = 200; // Altere esse valor para se adequar à velocidade de leitura do seu público
         const palavras = texto.trim().split(/\s+/); // Divide o texto em palavras
@@ -91,7 +92,7 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
                                         {element.abstract}
                                     </p>
                                 </div>
-                                <img src={config.baseURL + element.img} />
+                                <img alt="banner" src={config.baseURL + element.img} />
                             </div>
                         </div>
                     })

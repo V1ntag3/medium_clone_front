@@ -7,14 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
 import { validarEmail, validarSenha, validarTextoEmBranco } from '../../validators.js'
-const instance = axios.create({
-    baseURL: config.baseURL,
-});
 
 function LoginRegister() {
 
     const navigate = useNavigate()
-
     // variaveis do login
     const [emailLogin, setEmailLogin] = useState("")
     const [passwordLogin, setPasswordLogin] = useState("")
@@ -68,13 +64,12 @@ function LoginRegister() {
         setPasswordLoginError(validarTextoEmBranco(passwordLogin) || validarSenha(passwordLogin) ? true : false)
         setNaoCadasError(false)
         if (!emailLoginError && !passwordLoginError) {
-            instance.post('api/auth/login', {
+            axios.post(config.baseURL + '/api/auth/login', {
                 email: emailLogin,
                 password: passwordLogin
             }).then(response => {
-                console.log(response.data)
+                console.log(response)
                 if (response.status === 200) {
-                    console.log(response.data['token'])
                     localStorage.setItem('token', response.data['token'])
                     localStorage.setItem('expires', response.data['expires'])
                     setTimeout(() => {
@@ -83,9 +78,9 @@ function LoginRegister() {
                 }
             })
                 .catch(error => {
+                    console.log("aqio")
                     console.log(error)
                     if (error.response.data["message"] === 'Invalid password' || error.response.data["message"] === 'user not found') {
-                        console.log("sefoi")
                         setNaoCadasError(true)
                     }
                 });
@@ -103,7 +98,7 @@ function LoginRegister() {
         setConfirmPasswordRegisterError(validarTextoEmBranco(confirmPasswordRegister) || passwordRegister !== confirmPasswordRegister || validarSenha(confirmPasswordRegister) ? true : false)
 
         if (!emailRegisterError && !passwordRegisterError && !nameRegisterError && !surnameRegisterError && !confirmPasswordRegisterError) {
-            instance.post('api/auth/register', {
+            axios.post(config.baseURL + 'api/auth/register', {
                 name: nameRegister,
                 surname: surnameRegister,
                 email: emailRegister,
@@ -114,7 +109,6 @@ function LoginRegister() {
                 }
             })
                 .catch(error => {
-                    console.log(error)
                     if (error.data === 'E-mail already registered') {
 
                     }
