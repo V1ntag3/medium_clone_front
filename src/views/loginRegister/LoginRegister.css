@@ -45,22 +45,30 @@
     position: absolute;
     width: calc(100% - 80px);
     padding: 0px 40px 40px 40px;
+    height: 70vh;
+
 }
 
 .Login {
 
     transform: translateZ(20px);
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: -10px 4px 67px -11px rgba(0, 0, 0, 0.5);
+    overflow: auto;
 }
 
 .Register {
-
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: -10px 4px 67px -11px rgba(0, 0, 0, 0.5);
     transform: translateZ(-20px) rotateY(180deg);
     overflow: auto;
 
 }
 
 .InputPadrao {
-    margin: 0px auto 10px auto;
+    margin: 0px auto 0px auto;
     display: block;
     max-width: 314px;
     width: 100%;
@@ -107,12 +115,6 @@
     color: rgb(49, 149, 60);
 }
 
-@media (max-width: 823px) {
-    .Backgound {
-        width: calc(100% - 40px);
-        margin: 0px 20px;
-    }
-}
 
 @media (max-width: 556px) {
 
@@ -124,23 +126,24 @@
         padding: 0px;
     }
 
-    .Backgound {
-        border-radius: 0px;
-        -webkit-box-shadow: unset;
-        -moz-box-shadow: unset;
-        box-shadow: unset;
-        height: 102vh;
-        width: calc(100%);
-        margin: 0px;
-    }
 
     .Login,
     .Register {
         padding: 0px;
         width: 100%;
+        height: calc(100vh - 42px);
+        border-radius: 0px;
     }
 
     .ContainerLoginRegister h1 {
         margin-top: 50px;
     }
+}
+
+.ErrorMessege {
+    display: block;
+    max-width: 330px;
+    width: 100%;
+    margin: auto;
+    color: rgb(228, 97, 97);
 }
