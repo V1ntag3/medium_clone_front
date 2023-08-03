@@ -10,10 +10,12 @@ function ProfileInfo({imageProfile, about, followers, followings }) {
         localStorage.removeItem('token')
         localStorage.removeItem('expires')
         navigate('/')    }
+
+        
     return (
 
         <Container style={{ background: '#FFC017', height: 'auto', borderBottom: '1px solid black', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-            <div style={{width: '100%', maxWidth: 700}}><img alt='logout' onClick={() => logout()} style={{width:25, marginTop:10, float:'right', marginRight:15}} src={Logout}/></div>
+            <div style={{width: '100%', maxWidth: 700}}> <span style={{float:'right', padding:9, background:'black', color:'white', borderRadius:20, marginTop:5}}>Add Article</span> <img alt='logout' onClick={() => logout()} style={{width:25, marginTop:10, float:'right', marginRight:15, cursor:'pointer'}} src={Logout}/></div>
             <div style={{ width: '100%', maxWidth: 700, margin: 20, display:'flex', flexDirection:'row',    justifyContent: 'space-around', alignItems: 'center',textAlign:'center', marginBottom:0 }}>
                 <img alt='user' style={{ width: 100, height: 100, borderRadius: '50%', border: '3px solid white'}} src={imageProfile === "" ? UserDefault : config.baseURL + imageProfile} />
 

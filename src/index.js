@@ -10,6 +10,7 @@ import {
 import Home from './views/home/Home';
 import LoginRegister from './views/loginRegister/LoginRegister';
 import Profile from './views/profile/Profile';
+import ArticleCreate from './views/articleCreate/ArticleCreate';
 
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     Component: Profile
+  },
+  {
+    path: "/articleCreate",
+    Component: ArticleCreate
   }
 
 ]);
