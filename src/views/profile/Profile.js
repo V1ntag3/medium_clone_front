@@ -2,11 +2,12 @@ import './Profile.css';
 import Logo from '../../assets/imgs/2.png'
 import axios from 'axios';
 import config from '../../config.js'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Articles from '../components/Articles';
 
 import { useEffect, useState } from 'react';
 import ProfileInfo from '../components/ProfileInfo';
+import NavBar from '../components/NavBar';
 
 function Profile() {
     const [articles, setArticles] = useState([])
@@ -71,6 +72,8 @@ function Profile() {
                 const mesAtual = date.getMonth();
                 const mesAbreviado = mesesAbreviados[mesAtual];
                 var item = {
+                    id: response.data[key].id,
+
                     title: response.data.articles[key].title,
                     subtitle: response.data.articles[key].subtitle,
                     abstract: response.data.articles[key].abstract,
@@ -94,16 +97,7 @@ function Profile() {
 
     return (
         <>
-            <div className="Nav" style={{ width: 'calc(100% - 40px)' }}>
-                <div className='LogoContainer'>
-                    <img alt='logo' className='Logo' src={Logo} />
-                    <span style={{ marginLeft: 10 }} className="NameApp">NewMedium</span>
-                </div>
-                <div style={{display: 'flex'}}>
-                    <Link to="/"> <button className='ButtonPadrao'>Home</button></Link>
-                </div>
-               
-            </div>
+            <NavBar />
             <Articles articlesData={articles} activeScroll={false} bannerHome={<ProfileInfo imageProfile={imageProfile} about={about} followers={followers} followings={followings} />} />
         </>
     );
