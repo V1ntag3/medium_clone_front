@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
 import { validarEmail, validarSenha, validarTextoEmBranco } from '../../validators.js'
+import NavBar from '../components/NavBar';
 
 function LoginRegister() {
 
@@ -120,15 +121,7 @@ function LoginRegister() {
 
     return (
         <>
-            <div className="Nav">
-                <div className='LogoContainer'>
-                    <img alt='logo' className='Logo' src={Logo} />
-                    <span style={{ marginLeft: 10 }} className="NameApp">NewMedium</span>
-                </div>
-                <div>
-                    <Link to="/"> <button className='ButtonPadrao'>Home</button></Link>
-                </div>
-            </div>
+       <NavBar/>
 
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>

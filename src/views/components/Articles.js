@@ -2,9 +2,10 @@ import axios from 'axios';
 import config from '../../config.js'
 import UserDefault from '../../assets/svgs/user.svg'
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // List Articles
-function Articles({ articlesData, bannerHome, activeScroll = true}) {
+function Articles({ articlesData, bannerHome, activeScroll = true }) {
 
     const [articles, setArticles] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
@@ -17,12 +18,12 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
 
     // Função para lidar com o evento de scroll
     const handleScroll = (event) => {
-        if ( event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 100 && !isFetching) {
+        if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 100 && !isFetching) {
             setIsFetching(() => true);
 
             axios.get(config.baseURL + "/api/articles/all?limit=10&page=" + page)
                 .then((response) => {
-
+                    console.log(response)
                     var articlesArray = [];
                     articlesArray = articlesArray.concat(articles)
                     for (const key in response.data) {
@@ -38,6 +39,7 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
                         const mesAtual = date.getMonth();
                         const mesAbreviado = mesesAbreviados[mesAtual];
                         var item = {
+                            id: response.data[key].id,
                             title: response.data[key].title,
                             subtitle: response.data[key].subtitle,
                             abstract: response.data[key].abstract,
@@ -48,7 +50,7 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
                             nameUser: response.data[key].User.name
                         }
                         articlesArray.push(item)
-                    }                    
+                    }
 
                     if (response.data.length === 0) return
                     setIsFetching(() => false);
@@ -57,7 +59,7 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
                 })
         }
     }
-    
+
     function calcularTempoLeitura(texto) {
         const palavrasPorMinuto = 200; // Altere esse valor para se adequar à velocidade de leitura do seu público
         const palavras = texto.trim().split(/\s+/); // Divide o texto em palavras
@@ -67,11 +69,12 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
     }
 
     return (
-        <div style={{ position: 'relative', top: 66, overflow: 'auto',height: 'calc(100vh - 67px)' }} onScroll={handleScroll} >
-            { bannerHome }
+        <div style={{ position: 'relative', top: 66, overflow: 'auto', height: 'calc(100vh - 67px)' }} onScroll={handleScroll} >
+            {bannerHome}
             <div id='articles' className='ArticlesContainer' >
                 {
                     articles.length > 0 && articles.map((element, index) => {
+
                         return <div key={index} className='CardArticle'>
                             <div className='Dados'>
                                 <div className='Perfil'>
@@ -79,21 +82,25 @@ function Articles({ articlesData, bannerHome, activeScroll = true}) {
                                 </div>
                                 <span className='NomeDoPerfil'>{element.nameUser}</span>
                                 <span className='Time'>{element.date} . {element.readTime} min read</span>
-                            </div>
-                            <div style={{ display: 'flex' }}>
-                                <div className='TextComplete'>
-                                    <h2>
-                                        {element.title}
-                                    </h2>
-                                    <h3>
-                                        {element.subtitle}
-                                    </h3>
-                                    <p style={{ textAlign: 'justify' }}>
-                                        {element.abstract}
-                                    </p>
+                            </div>                           
+                             <Link style={{color:'black', textDecoration:'none'}} to={"/article/" + element.id}>
+                                {console.log(element)}
+                                <div style={{ display: 'flex' }}>
+                                    <div className='TextComplete'>
+                                        <h2>
+                                            {element.title}
+                                        </h2>
+                                        <h3>
+                                            {element.subtitle}
+                                        </h3>
+                                        <p style={{ textAlign: 'justify' }}>
+                                            {element.abstract}
+                                        </p>
+                                    </div>
+                                    <img alt="banner" src={config.baseURL + element.img} />
                                 </div>
-                                <img alt="banner" src={config.baseURL + element.img} />
-                            </div>
+                            </Link>
+
                         </div>
                     })
                 }

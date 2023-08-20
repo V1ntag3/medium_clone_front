@@ -1,0 +1,40 @@
+.BannerArticleView{
+    background-color: black;
+    width: 100%;
+    height: 35vh;
+}
+
+.SubTitleArticleView{
+    font-weight: 400;
+    margin-top: 10px;
+}
+.TitleArticleView{
+    margin-block-end: 0em;
+    font-size: 2.5em
+}
+.BannerArticleView{
+    background-size: cover !important;
+    background-position: center !important;
+}
+.language-bash{
+    display: block;
+    width: calc(100% - 30px) !important;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    border-radius: 6px;
+    color: #000;
+    background: #e4e4ff;
+}
+code{
+    display: block;
+    width: calc(100% - 30px) !important;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    border-radius: 6px;
+    color: #000;
+    background: #e4e4ff;
+}
