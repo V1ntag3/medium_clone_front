@@ -5,6 +5,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validarEmail, validarSenha, validarTextoEmBranco } from '../../validators.js'
 import NavBar from '../components/NavBar';
+import Input from '@mui/material/Input';
+
+import IconButton from '@mui/material/IconButton';
+
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 
 function LoginRegister() {
 
@@ -12,12 +19,18 @@ function LoginRegister() {
     // variaveis do login
     const [emailLogin, setEmailLogin] = useState("")
     const [passwordLogin, setPasswordLogin] = useState("")
+    const [showPasswordLogin, setShowPasswordLogin] = useState(false)
+
     // variaveis do registro
     const [nameRegister, setNameRegister] = useState("")
     const [surnameRegister, setSurnameRegister] = useState("")
     const [emailRegister, setEmailRegister] = useState("")
     const [passwordRegister, setPasswordRegister] = useState("")
+    const [showPasswordRegister, setShowPasswordRegister] = useState(false)
+
     const [confirmPasswordRegister, setConfirmPasswordRegister] = useState("")
+    const [showConfPasswordRegister, setShowConfPasswordRegister] = useState(false)
+
     // variaveis do login
     const [emailLoginError, setEmailLoginError] = useState("")
     const [passwordLoginError, setPasswordLoginError] = useState("")
@@ -118,7 +131,7 @@ function LoginRegister() {
 
     return (
         <>
-       <NavBar/>
+            <NavBar />
 
 
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
@@ -134,9 +147,27 @@ function LoginRegister() {
                             <span className='ErrorMessege' style={{ display: emailLoginError ? 'block' : 'none' }}>email invalid</span>
 
                             <label className='LabelPadrao'>password</label>
-                            <input placeholder='please enter with your password' className='InputPadrao' type='password' value={passwordLogin} onChange={(event) => setPasswordLogin(event.target.value)} />
+                            <Input
+                                style={{display:'flex'}}
+                                placeholder='please enter with your password' className='InputPadrao' value={passwordLogin} onChange={(event) => setPasswordLogin(event.target.value)}
+                                type={showPasswordLogin ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={() => {
+                                                setShowPasswordLogin(showPasswordLogin === true ? false : true)
+                                            }}
+                                            edge="end"
+                                        >
+                                            {showPasswordLogin ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
                             <span className='ErrorMessege' style={{ display: passwordLoginError ? 'block' : 'none' }}>password invalid</span>
                             <span className='ErrorMessege' style={{ display: naoCadasError ? 'block' : 'none' }}>user not found</span>
+
 
                             <button type='submit' className='Button ButtonLogin'>SingIn</button>
                         </form>
@@ -159,11 +190,44 @@ function LoginRegister() {
                             <span className='ErrorMessege' style={{ display: cadasError ? 'block' : 'none' }}>email already registered</span>
 
                             <label className='LabelPadrao'>password</label>
-                            <input placeholder='please enter with your password' className='InputPadrao' type='password' value={passwordRegister} onChange={(event) => setPasswordRegister(event.target.value)} />
+                            <Input
+                                style={{display:'flex'}}
+                                placeholder='please enter with your password' className='InputPadrao' value={passwordRegister} onChange={(event) => setPasswordRegister(event.target.value)}                                 type={showPasswordRegister ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={() => {
+                                                setShowPasswordRegister(showPasswordRegister === true ? false : true)
+                                            }}
+                                            edge="end"
+                                        >
+                                            {showPasswordRegister ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
                             <span className='ErrorMessege' style={{ display: passwordRegisterError ? 'block' : 'none' }}>password invalid</span>
 
                             <label className='LabelPadrao'>confirm password</label>
-                            <input placeholder='please confirm your password' className='InputPadrao' type='password' value={confirmPasswordRegister} onChange={(event) => setConfirmPasswordRegister(event.target.value)} />
+                            <Input
+                                style={{display:'flex'}}
+                                placeholder='please confirm your password' className='InputPadrao'  value={confirmPasswordRegister} onChange={(event) => setConfirmPasswordRegister(event.target.value)}                                 
+                                type={showConfPasswordRegister ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={() => {
+                                                setShowConfPasswordRegister(showConfPasswordRegister === true ? false : true)
+                                            }}
+                                            edge="end"
+                                        >
+                                            {showConfPasswordRegister ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
                             <span className='ErrorMessege' style={{ display: confirmPasswordRegisterError ? 'block' : 'none' }}>confirm password invalid</span>
 
                             <button type='submit' className='ButtonRegister'>Register</button>

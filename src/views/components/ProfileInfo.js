@@ -19,7 +19,7 @@ function ProfileInfo({ imageProfile, about, followers, followings }) {
 
     return (
 
-        <Container style={{ background: '#FFC017', height: 'auto', borderBottom: '1px solid black', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+        <Container style={{ background: '#FFC017', height: 'auto', borderBottom: '1px solid black', display: 'flex', alignItems: 'center', flexDirection: 'column', maxWidth:'100%' }}>
             <div style={{ width: '100%', maxWidth: 700 }}> <img alt='logout' onClick={() => {setShowModalLogout(true)}} style={{ width: 25, marginTop: 14, float: 'right', marginRight: 15, cursor: 'pointer' }} src={Logout} /> <Link to="/articleCreate"><span style={{ float: 'right', padding: 9, background: 'black', color: 'white', borderRadius: 20, marginTop: 5, marginRight: 10 }}>Add Article</span></Link></div>
             <div style={{ width: '100%', maxWidth: 700, margin: 20, display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', textAlign: 'center', marginBottom: 0 }}>
                 <img alt='user' style={{ width: 100, height: 100, borderRadius: '50%', border: '3px solid white' }} src={imageProfile === "" ? UserDefault : config.baseURL + imageProfile} />

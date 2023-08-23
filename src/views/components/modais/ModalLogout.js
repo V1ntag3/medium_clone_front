@@ -4,7 +4,7 @@ import Logout from '../../../assets/svgs/logout.svg'
 
 function ModalLogout(props) {
     return (
-        <Modal size="sm" show={props.show} onHide={() => {
+        <Modal style={{marginTop:'10vh'}} size="sm" show={props.show} onHide={() => {
             props.setShow()
         }}>
             <Modal.Header closeButton>
