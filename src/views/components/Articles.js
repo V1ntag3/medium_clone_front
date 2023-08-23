@@ -1,24 +1,29 @@
 import axios from 'axios';
 import config from '../../config.js'
+
 import UserDefault from '../../assets/svgs/user.svg'
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import LataLixo from '../../assets/svgs/lixo.svg'
+import DeleteImage from '../../assets/svgs/deleteImage.svg'
+import ModalGeneric from '../components/modais/ModalGeneric.js'
 // List Articles
-function Articles({ bannerHome,  userId=null }) {
-
+function Articles({ bannerHome, userId = null }) {
+    const navigate = useNavigate()
     const [articles, setArticles] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
     const [page, setPage] = useState(1);
+    const [showModal, setShowModal] = useState()
+    const [selectedArticle, setSelectedArticle] = useState()
 
     useEffect(() => {
         getArticles()
-    },[userId]);
+    }, [userId]);
 
     const getArticles = () => {
         var endpointer1 = '/api/articles/all?limit=10&page=' + page
         var endpointer2 = '/api/articles/' + userId + '?limit=10&page=' + page
-        var escolha =  userId === null ? endpointer1 : endpointer2
+        var escolha = userId === null ? endpointer1 : endpointer2
         axios.get(config.baseURL + escolha)
             .then((response) => {
                 var articlesArray = [];
@@ -56,7 +61,24 @@ function Articles({ bannerHome,  userId=null }) {
                 setIsFetching(() => false);
 
             }).catch((error) => {
-                
+
+            })
+    }
+
+    const deleteArticle = () => {
+        console.log(selectedArticle)
+        axios.delete(config.baseURL + "/api/articles/" + selectedArticle, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+            .then((response) => {
+                console.log(response)
+                if (response.status === 200) {
+                    navigate(0)
+                }
+            }).catch((error) => {
+                console.log(error)
             })
     }
 
@@ -86,13 +108,17 @@ function Articles({ bannerHome,  userId=null }) {
                         return <div key={index} className='CardArticle'>
                             <div className='Dados'>
                                 <Link to={'/profile/' + element.userId}>
-                                <div className='Perfil'>
-                                    <img alt='user_photo' src={element.photoUser === "" ? UserDefault : config.baseURL + element.photoUser} />
-                                </div>
-                                <span className='NomeDoPerfil'>{element.nameUser}</span>
+                                    <div className='Perfil'>
+                                        <img alt='user_photo' src={element.photoUser === "" ? UserDefault : config.baseURL + element.photoUser} />
+                                    </div>
+                                    <span className='NomeDoPerfil'>{element.nameUser}</span>
                                 </Link>
 
                                 <span className='Time'>{element.date} . {element.readTime} min read</span>
+                                {window.location.pathname !== "/" && <div><img onClick={() => {
+                                    setShowModal(true)
+                                    setSelectedArticle(element.id)
+                                }} src={LataLixo} style={{ width: 20, height: 20, marginBottom: 5, marginLeft: 10, cursor: 'pointer' }} /></div>}
                             </div>
                             <Link style={{ color: 'black', textDecoration: 'none' }} to={"/article/" + element.id}>
                                 <div style={{ display: 'flex' }}>
@@ -115,6 +141,9 @@ function Articles({ bannerHome,  userId=null }) {
                     })
                 }
             </div>
+            <ModalGeneric textButtonConfirm={"Delete"} image={DeleteImage} title={"Delete Article"} text={"After deleting the article you will not be able to recover"} execute={deleteArticle} show={showModal} setShow={() => {
+                setShowModal(false)
+            }} />
         </div>
 
     );

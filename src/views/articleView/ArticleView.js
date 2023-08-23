@@ -38,10 +38,10 @@ function ArticleView() {
         return 'url(' + config.baseURL + urlF + ')'
     }
     return (
-        <div style={{ height: '100vh', overflow: 'auto' }}>
+        <div style={{marginTop:66, height: 'calc(100vh - 66px)', overflow: 'auto' }}>
             <NavBar />
             <div>
-                <div className='BannerArticleView' style={{ background: returnBg(banner), marginTop: 66, marginBottom: 0 }}>
+                <div className='BannerArticleView' style={{ background: returnBg(banner), marginBottom: 0 }}>
                 </div>
 
                 <div style={{ maxWidth: 700, marginBottom: 20, paddingInline: 15, overflowX: 'hidden', marginTop: 0, margin: 'auto' }}>

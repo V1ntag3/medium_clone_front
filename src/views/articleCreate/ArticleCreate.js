@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { validarTextoEmBranco } from '../../validators.js'
 import axios from 'axios'
 import config from '../../config';
+import { Figure } from 'react-bootstrap';
 
 function ArticleCreate() {
     const [title, setTitle] = useState('')
@@ -27,14 +28,14 @@ function ArticleCreate() {
         setSubtitleError(validarTextoEmBranco(subtitle) ? true : false)
         setAbstractError(validarTextoEmBranco(abstract) ? true : false)
         setImageError(image.file === null ? true : false)
-    
+
 
         if (!imageError && !titleError && !subtitleError && !abstractError) {
             axios.post(config.baseURL + '/api/article/create', {
                 title: title,
                 subtitle: subtitle,
                 abstract: abstract,
-                text: article, 
+                text: article,
                 bannerImage: image64
             }, {
                 headers: {
@@ -44,7 +45,7 @@ function ArticleCreate() {
                 console.log(response)
                 navigate('/')
             }).catch((error) => {
-                if (error.response.status === 401 ) {
+                if (error.response.status === 401) {
                     localStorage.removeItem('token')
                     localStorage.removeItem('expires')
                 }
@@ -53,7 +54,7 @@ function ArticleCreate() {
     }
 
     return (
-        <div style={{ height: '100vh', overflow: 'auto' }}>
+        <div style={{ height: 'calc(100vh - 66px)', overflow: 'auto', marginTop: 66 }}>
             <div className="Nav">
                 <div className='LogoContainer'>
                     <img alt='logo' className='Logo' src={Logo} />
@@ -66,12 +67,17 @@ function ArticleCreate() {
 
             </div>
 
-            <div style={{ width: '100%', maxWidth: 700, margin: 'auto', marginTop: 77, marginBottom: 20 }}>
-                <div style={{marginBottom:20, display:'flex', justifyContent:'center'}}>
+            <div style={{ width: '100%', maxWidth: 700, margin: 'auto', marginTop: 20, marginBottom: 20 }}>
+                <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'center' }}>
                     <button onClick={() => createArticle()} style={{ width: 165, marginRight: 10 }} className='ButtonPadrao'>Create Article</button>
                 </div>
-                <div style={{display:'flex', justifyContent: 'space-evenly'}}>
-                    <img alt='' src={image.file} style={{ width: 200, background: 'white' }} accept="image/*" />
+                <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Figure>
+                        <Figure.Image
+                            width={250}
+                            src={image.file} />
+                    </Figure>
+                    {/* <img alt='' src={image.file} style={{ width: , background: 'white' }} accept="image/*" /> */}
                     <label htmlFor='imageInput' className='ButtonPadrao' style={{ width: 160, textAlign: 'center', padding: '10px 15px', color: imageError ? '#FF2E2E' : 'white' }} >Adicionar Banner</label>
                     <input accept="image/png,image/jpeg" id='imageInput' className='' style={{ display: 'none' }} type='file' onChange={(event) => {
 
@@ -93,13 +99,13 @@ function ArticleCreate() {
                             file: URL.createObjectURL(event.target.files[0])
                         })
 
-                      
+
                         var reader = new FileReader();
-                          
+
                         reader.onload = function () {
                             var base64String = reader.result.replace("data:", "")
                                 .replace(/^.+,/, "");
-                      
+
                             setImage64(base64String)
                             console.log(base64String);
                         }

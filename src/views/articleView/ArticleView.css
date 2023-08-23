@@ -38,5 +38,8 @@ code {
 }
 
 .TextArticleView pre code {
-    background: #e4e4ff;
+    background: #e4e4ed;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    
 }

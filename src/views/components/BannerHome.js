@@ -1,10 +1,9 @@
 
-import { Container } from 'react-bootstrap';
 
 function BannerHome() {
  
     return (
-        <Container style={{ background: '#FFC017', height: 300, borderBottom: '1px solid black', display: 'flex', alignItems: 'center' }}>
+        <div style={{ background: '#FFC017', height: 300, borderBottom: '1px solid black', display: 'flex', alignItems: 'center' }}>
         <span className='TextBanner'>
             Compartillhe seu conhecimento
         </span>
@@ -30,7 +29,7 @@ function BannerHome() {
             <span></span>
             <span></span>
         </div>
-    </Container>
+    </div>
     );
 }
 

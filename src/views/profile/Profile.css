@@ -1,4 +1,12 @@
-.TextInfoUser{
+.TextInfoUser {
     color: white;
     font-size: 20px;
+}
+
+.ItemProfile {
+    width: 25px;
+    margin-top: 14px;
+    float: right;
+    margin-right: 15px;
+    cursor: pointer
 }

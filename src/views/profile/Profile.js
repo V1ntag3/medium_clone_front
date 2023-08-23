@@ -15,7 +15,9 @@ function Profile() {
     const [about, setAbout] = useState('')
     const [userId, setUserId] = useState('')
 
+
     useEffect(() => {
+        // console.log(parseJwt(localStorage.getItem('token')))
         var escolha = typeof(userIdP) === 'string' ?  '/api/user/profile/' + userIdP : '/api/user/profile'
         axios.get(config.baseURL + escolha, {
                 maxBodyLength: Infinity,
@@ -42,7 +44,7 @@ function Profile() {
     return (
         <>
             <NavBar />
-            <Articles userId={userId} bannerHome={<ProfileInfo imageProfile={imageProfile} about={about} followers={followers} followings={followings} />} />
+            <Articles userId={userId} bannerHome={<ProfileInfo userId={userId} imageProfile={imageProfile} about={about} followers={followers} followings={followings} />} />
         </>
     );
 }
