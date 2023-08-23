@@ -5,58 +5,66 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // List Articles
-function Articles({ articlesData, bannerHome, activeScroll = true }) {
+function Articles({ bannerHome,  userId=null }) {
 
     const [articles, setArticles] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
-    const [page, setPage] = useState(2);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
-        setIsFetching(!activeScroll)
-        setArticles(articlesData);
-    }, [articlesData]);
+        getArticles()
+    },[userId]);
+
+    const getArticles = () => {
+        var endpointer1 = '/api/articles/all?limit=10&page=' + page
+        var endpointer2 = '/api/articles/' + userId + '?limit=10&page=' + page
+        var escolha =  userId === null ? endpointer1 : endpointer2
+        axios.get(config.baseURL + escolha)
+            .then((response) => {
+                var articlesArray = [];
+                articlesArray = articlesArray.concat(articles)
+                for (const key in response.data) {
+                    var date = new Date(response.data[key].createTime)
+                    // Obtém os dois últimos dígitos do ano
+                    const doisUltimosDigitosAno = date.getFullYear().toString().slice(-2);
+                    // Array com os nomes dos meses abreviados
+                    const mesesAbreviados = [
+                        'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+                        'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+                    ];
+                    // Obtém o mês atual e o mês abreviado
+                    const mesAtual = date.getMonth();
+                    const mesAbreviado = mesesAbreviados[mesAtual];
+                    var item = {
+                        id: response.data[key].id,
+                        title: response.data[key].title,
+                        subtitle: response.data[key].subtitle,
+                        abstract: response.data[key].abstract,
+                        img: response.data[key].photoBanner,
+                        date: mesAbreviado + " " + doisUltimosDigitosAno,
+                        readTime: calcularTempoLeitura(response.data[key].text),
+                        photoUser: response.data[key].User.imageProfile,
+                        nameUser: response.data[key].User.name,
+                        userId: response.data[key].User.id
+                    }
+                    articlesArray.push(item)
+                }
+
+                if (response.data.length === 0) return
+                setArticles(articlesArray);
+                setPage(prevPage => prevPage + 1); // Usando a função de atualização do estado para obter o valor mais recente de 'page'
+                setIsFetching(() => false);
+
+            }).catch((error) => {
+                
+            })
+    }
 
     // Função para lidar com o evento de scroll
     const handleScroll = (event) => {
         if (event.target.scrollTop + event.target.clientHeight >= event.target.scrollHeight - 100 && !isFetching) {
-            setIsFetching(() => true);
-
-            axios.get(config.baseURL + "/api/articles/all?limit=10&page=" + page)
-                .then((response) => {
-                    console.log(response)
-                    var articlesArray = [];
-                    articlesArray = articlesArray.concat(articles)
-                    for (const key in response.data) {
-                        var date = new Date(response.data[key].createTime)
-                        // Obtém os dois últimos dígitos do ano
-                        const doisUltimosDigitosAno = date.getFullYear().toString().slice(-2);
-                        // Array com os nomes dos meses abreviados
-                        const mesesAbreviados = [
-                            'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-                            'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-                        ];
-                        // Obtém o mês atual e o mês abreviado
-                        const mesAtual = date.getMonth();
-                        const mesAbreviado = mesesAbreviados[mesAtual];
-                        var item = {
-                            id: response.data[key].id,
-                            title: response.data[key].title,
-                            subtitle: response.data[key].subtitle,
-                            abstract: response.data[key].abstract,
-                            img: response.data[key].photoBanner,
-                            date: mesAbreviado + " " + doisUltimosDigitosAno,
-                            readTime: calcularTempoLeitura(response.data[key].text),
-                            photoUser: response.data[key].User.imageProfile,
-                            nameUser: response.data[key].User.name
-                        }
-                        articlesArray.push(item)
-                    }
-
-                    if (response.data.length === 0) return
-                    setIsFetching(() => false);
-                    setArticles(() => articlesArray);
-                    setPage(prevPage => prevPage + 1); // Usando a função de atualização do estado para obter o valor mais recente de 'page'
-                })
+            setIsFetching(true);
+            getArticles()
         }
     }
 
@@ -77,14 +85,16 @@ function Articles({ articlesData, bannerHome, activeScroll = true }) {
 
                         return <div key={index} className='CardArticle'>
                             <div className='Dados'>
+                                <Link to={'/profile/' + element.userId}>
                                 <div className='Perfil'>
                                     <img alt='user_photo' src={element.photoUser === "" ? UserDefault : config.baseURL + element.photoUser} />
                                 </div>
                                 <span className='NomeDoPerfil'>{element.nameUser}</span>
+                                </Link>
+
                                 <span className='Time'>{element.date} . {element.readTime} min read</span>
-                            </div>                           
-                             <Link style={{color:'black', textDecoration:'none'}} to={"/article/" + element.id}>
-                                {console.log(element)}
+                            </div>
+                            <Link style={{ color: 'black', textDecoration: 'none' }} to={"/article/" + element.id}>
                                 <div style={{ display: 'flex' }}>
                                     <div className='TextComplete'>
                                         <h2>

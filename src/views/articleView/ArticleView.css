@@ -25,9 +25,8 @@
     line-height: 1.45;
     border-radius: 6px;
     color: #000;
-    background: #e4e4ff;
 }
-code{
+code {
     display: block;
     width: calc(100% - 30px) !important;
     padding: 16px;
@@ -36,5 +35,8 @@ code{
     line-height: 1.45;
     border-radius: 6px;
     color: #000;
+}
+
+.TextArticleView pre code {
     background: #e4e4ff;
 }

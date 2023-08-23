@@ -12,6 +12,8 @@ import LoginRegister from './views/loginRegister/LoginRegister';
 import Profile from './views/profile/Profile';
 import ArticleCreate from './views/articleCreate/ArticleCreate';
 import ArticleView from './views/articleView/ArticleView';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const router = createBrowserRouter([
@@ -24,6 +26,9 @@ const router = createBrowserRouter([
     Component: LoginRegister
   },
   {
+    path: "/profile/:userIdP",
+    Component: Profile
+  },{
     path: "/profile",
     Component: Profile
   },

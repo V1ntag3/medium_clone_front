@@ -43,16 +43,18 @@ function ArticleCreate() {
             }).then(response => {
                 console.log(response)
                 navigate('/')
-            })
-                .catch(error => {
-                    console.log(error)
-                });
+            }).catch((error) => {
+                if (error.response.status === 401 ) {
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('expires')
+                }
+            });
         }
     }
 
     return (
         <div style={{ height: '100vh', overflow: 'auto' }}>
-            <div className="Nav" style={{ width: 'calc(100% - 40px)' }}>
+            <div className="Nav">
                 <div className='LogoContainer'>
                     <img alt='logo' className='Logo' src={Logo} />
                     <span style={{ marginLeft: 10 }} className="NameApp">NewMedium</span>
@@ -66,11 +68,11 @@ function ArticleCreate() {
 
             <div style={{ width: '100%', maxWidth: 700, margin: 'auto', marginTop: 77, marginBottom: 20 }}>
                 <div style={{marginBottom:20, display:'flex', justifyContent:'center'}}>
-                    <button onClick={() => createArticle()} style={{ width: 150, marginRight: 10 }} className='ButtonPadrao'>Create Article</button>
+                    <button onClick={() => createArticle()} style={{ width: 165, marginRight: 10 }} className='ButtonPadrao'>Create Article</button>
                 </div>
                 <div style={{display:'flex', justifyContent: 'space-evenly'}}>
                     <img alt='' src={image.file} style={{ width: 200, background: 'white' }} accept="image/*" />
-                    <label htmlFor='imageInput' className='ButtonPadrao' style={{ width: 125, height: 15, textAlign: 'center', padding: '15px 15px', color: imageError ? '#FF2E2E' : 'white' }} >Adicionar Banner</label>
+                    <label htmlFor='imageInput' className='ButtonPadrao' style={{ width: 160, textAlign: 'center', padding: '10px 15px', color: imageError ? '#FF2E2E' : 'white' }} >Adicionar Banner</label>
                     <input accept="image/png,image/jpeg" id='imageInput' className='' style={{ display: 'none' }} type='file' onChange={(event) => {
 
                         const file = event.target.files[0];

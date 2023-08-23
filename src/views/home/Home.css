@@ -20,17 +20,17 @@
 
 .Nav {
   color: rgb(0, 0, 0);
-  width: calc(100% - 40px);
+  width: 100%;
   background-color: #FFC017;
   padding: 10px 20px;
   border-bottom: 1px solid black;
-  height: 45px;
+  height: 66px;
   position: fixed;
   top: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10000;
+  z-index: 1000;
 
 }
 
@@ -44,6 +44,7 @@
   border: none;
   float: right;
   align-self: center;
+  cursor: pointer;
 
 }
 
@@ -79,7 +80,7 @@
 }
 
 .CardArticle {
-  width: calc(100% - 32px);
+  width: 100%;
   background-color: white;
   padding: 30px 16px;
   border-bottom: 1px solid #c9c9c9;
@@ -126,4 +127,8 @@
 .TextComplete {
   padding: 0px 20px 0px 0px;
   width: 80%;
+}
+a{
+  color: rgb(65, 65, 65) !important;
+  text-decoration: none !important;
 }

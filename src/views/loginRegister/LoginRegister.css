@@ -18,6 +18,7 @@
 }
 
 .ContainerLoginRegister h3 {
+    font-size: 20px;
     margin-top: 30px;
     color: rgb(49, 149, 60);
 }
@@ -41,10 +42,10 @@
 
 .Login,
 .Register {
-    margin-top: 20px;
+    margin-top: 30px;
     position: absolute;
     width: calc(100% - 80px);
-    padding: 0px 40px 40px 40px;
+    padding: 40px 40px 40px 40px;
     height: 70vh;
 
 }
@@ -82,7 +83,7 @@
 .LabelPadrao {
     font-size: 14px;
     display: block;
-    max-width: 335px;
+    max-width: 314px;
     margin: 10px auto auto auto;
 }
 
@@ -133,6 +134,8 @@
         width: 100%;
         height: calc(100vh - 42px);
         border-radius: 0px;
+        overflow: auto;
+
     }
 
     .ContainerLoginRegister h1 {

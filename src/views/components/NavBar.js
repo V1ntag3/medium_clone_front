@@ -23,7 +23,7 @@ function NavBar() {
                     setImageProfile(response.data.image_profile);
 
                 }).catch((error) => {
-                    if (error.response.status === 401 || error.response.status === 404) {
+                    if (error.response.status === 401) {
                         localStorage.removeItem('token');
                         localStorage.removeItem('expires');
                     }
@@ -50,7 +50,7 @@ function NavBar() {
     } 
     if (window.location.pathname === "/") {
         return (
-            <div className="Nav" style={{ width: 'calc(100% - 40px)' }}>
+            <div className="Nav">
                 <div className='LogoContainer'>
                     <img alt='logo' className='Logo' src={Logo} />
                     <span style={{ marginLeft: 10 }} className="NameApp">NewMedium</span>
@@ -65,7 +65,7 @@ function NavBar() {
     }
     else{
         return (
-            <div className="Nav" style={{ width: 'calc(100% - 40px)' }}>
+            <div className="Nav" >
                 <div className='LogoContainer'>
                     <img alt='logo' className='Logo' src={Logo} />
                     <span style={{ marginLeft: 10 }} className="NameApp">NewMedium</span>

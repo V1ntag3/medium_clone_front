@@ -1,11 +1,8 @@
 import './LoginRegister.css';
-import Logo from '../../assets/imgs/2.png'
 import axios from 'axios';
 import config from '../../config.js'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'
-
 import { validarEmail, validarSenha, validarTextoEmBranco } from '../../validators.js'
 import NavBar from '../components/NavBar';
 
