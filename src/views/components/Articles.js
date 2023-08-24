@@ -66,7 +66,6 @@ function Articles({ bannerHome, userId = null }) {
     }
 
     const deleteArticle = () => {
-        console.log(selectedArticle)
         axios.delete(config.baseURL + "/api/articles/" + selectedArticle, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -97,7 +96,15 @@ function Articles({ bannerHome, userId = null }) {
         const tempoLeituraMinutos = Math.ceil(numeroPalavras / palavrasPorMinuto); // Calcula o tempo de leitura em minutos, arredondado para cima
         return tempoLeituraMinutos;
     }
+    const parseJwt = (token) => {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
 
+        return JSON.parse(jsonPayload);
+    }
     return (
         <div style={{ position: 'relative', top: 66, overflow: 'auto', height: 'calc(100vh - 67px)' }} onScroll={handleScroll} >
             {bannerHome}
@@ -115,7 +122,7 @@ function Articles({ bannerHome, userId = null }) {
                                 </Link>
 
                                 <span className='Time'>{element.date} . {element.readTime} min read</span>
-                                {window.location.pathname !== "/" && <div><img onClick={() => {
+                                {window.location.pathname !== "/" && localStorage.getItem('token') !== null && parseJwt(localStorage.getItem('token')).iss === userId &&  <div><img onClick={() => {
                                     setShowModal(true)
                                     setSelectedArticle(element.id)
                                 }} src={LataLixo} style={{ width: 20, height: 20, marginBottom: 5, marginLeft: 10, cursor: 'pointer' }} /></div>}

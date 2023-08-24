@@ -89,7 +89,6 @@ function LoginRegister() {
                 }
             })
                 .catch(error => {
-                    console.log("aqio")
                     console.log(error)
                     if (error.response.data["message"] === 'Invalid password' || error.response.data["message"] === 'user not found') {
                         setNaoCadasError(true)
@@ -101,6 +100,7 @@ function LoginRegister() {
     function register(event) {
         event.preventDefault();
 
+
         setNameRegisterError(validarTextoEmBranco(nameRegister) ? true : false)
         setSurnameRegisterError(validarTextoEmBranco(surnameRegister) ? true : false)
 
@@ -108,18 +108,23 @@ function LoginRegister() {
         setPasswordRegisterError(validarTextoEmBranco(passwordRegister) || passwordRegister !== confirmPasswordRegister || validarSenha(passwordRegister) ? true : false)
         setConfirmPasswordRegisterError(validarTextoEmBranco(confirmPasswordRegister) || passwordRegister !== confirmPasswordRegister || validarSenha(confirmPasswordRegister) ? true : false)
 
+
+
         if (!emailRegisterError && !passwordRegisterError && !nameRegisterError && !surnameRegisterError && !confirmPasswordRegisterError) {
-            axios.post(config.baseURL + 'api/auth/register', {
+            axios.post(config.baseURL + '/api/auth/register', {
                 name: nameRegister,
                 surname: surnameRegister,
                 email: emailRegister,
                 password: passwordRegister
             }).then(response => {
+                console.log(response)
                 if (response.status === 200) {
                     changeRegister()
                 }
             })
                 .catch(error => {
+                    console.log(error)
+
                     if (error.data === 'E-mail already registered') {
 
                     }

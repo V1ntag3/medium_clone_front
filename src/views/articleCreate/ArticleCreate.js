@@ -107,7 +107,6 @@ function ArticleCreate() {
                                 .replace(/^.+,/, "");
 
                             setImage64(base64String)
-                            console.log(base64String);
                         }
 
                         reader.readAsDataURL(file);

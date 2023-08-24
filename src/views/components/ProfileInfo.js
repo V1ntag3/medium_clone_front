@@ -33,12 +33,9 @@ function ProfileInfo({ imageProfile, about, followers, followings, userId }) {
 
         <Container style={{ background: '#FFC017', height: 'auto', borderBottom: '1px solid black', display: 'flex', alignItems: 'center', flexDirection: 'column', maxWidth: '100%' }}>
             <div style={{ width: '100%', maxWidth: 700 }}>
-            {localStorage.getItem('token') !== null && <img alt='logout' className='ItemProfile' onClick={() => { setShowModal(true) }} src={Logout} />}
+            {localStorage.getItem('token') !== null && parseJwt(localStorage.getItem('token')).iss === userId && <img alt='logout' className='ItemProfile' onClick={() => { setShowModal(true) }} src={Logout} />}
                 {/* <img style={{marginTop:12}} alt='logout' className='ItemProfile' onClick={() => { setShowModal(true) }} src={Editar} /> */}
-
-                {localStorage.getItem('token') !== null && parseJwt(localStorage.getItem('token')).iss === userId &&
-
-                    <Link to="/articleCreate">
+                {localStorage.getItem('token') !== null && parseJwt(localStorage.getItem('token')).iss === userId && <Link to="/articleCreate">
                         <span style={{ float: 'right', padding: 9, background: 'black', color: 'white', borderRadius: 20, marginTop: 5, marginRight: 10 }}>Add Article</span>
                     </Link>}
             </div>

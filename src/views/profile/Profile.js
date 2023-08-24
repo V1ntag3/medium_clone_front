@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 
 function Profile() {
     const { userIdP } = useParams()
+
     const [imageProfile, setImageProfile] = useState('')
     const [followers, setFollowers] = useState(0)
     const [followings, setFollowings] = useState(0)
@@ -17,7 +18,6 @@ function Profile() {
 
 
     useEffect(() => {
-        // console.log(parseJwt(localStorage.getItem('token')))
         var escolha = typeof(userIdP) === 'string' ?  '/api/user/profile/' + userIdP : '/api/user/profile'
         axios.get(config.baseURL + escolha, {
                 maxBodyLength: Infinity,
@@ -44,7 +44,7 @@ function Profile() {
     return (
         <>
             <NavBar />
-            <Articles userId={userId} bannerHome={<ProfileInfo userId={userId} imageProfile={imageProfile} about={about} followers={followers} followings={followings} />} />
+            <Articles userId={userId} bannerHome={<ProfileInfo userId={ typeof(userIdP) === 'stirng' ? userIdP : userId} imageProfile={imageProfile} about={about} followers={followers} followings={followings} />} />
         </>
     );
 }
